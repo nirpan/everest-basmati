@@ -1,1 +1,19 @@
-{}
+{
+  "version": 2,
+  "alias": ["www.everestbasmati.co.uk"],
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "status": 301,
+      "headers": {
+        "Location": "https://everestbasmati.co.uk/$1"
+      }
+    }
+  ]
+}
