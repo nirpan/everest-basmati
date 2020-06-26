@@ -127,7 +127,7 @@ div.panel-body a {
 /*header*/
 
 .headerBackground{
-    background-image: url('images/header.JPG');
+    background-image: url('/images/header.JPG');
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
