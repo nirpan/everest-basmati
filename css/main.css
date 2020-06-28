@@ -46,6 +46,11 @@ h3 {
 	color: #c53721;
 }
 
+p, span{
+    color:black;
+    font-weight: normal;
+}
+
 /* Homepage Containers */
 
 .col-lg-4.home h2,
