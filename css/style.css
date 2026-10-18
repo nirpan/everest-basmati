@@ -1,0 +1,392 @@
+/* Basmati – site styles
+   Palette taken from the shopfront: maroon sign, gold lettering, cream paper. */
+
+:root {
+    --maroon: #6b1f2a;
+    --maroon-deep: #4a151d;
+    --maroon-ink: #351016;
+    --gold: #c9a24b;
+    --gold-soft: #e6cf92;
+    --paper: #fbf8f2;
+    --paper-deep: #f1eadc;
+    --ink: #2a2224;
+    --ink-soft: #6b5f61;
+    --line: #d9cfbd;
+
+    --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+    --wrap: 1100px;
+    --gutter: 16px;
+    --space: 1.5rem;
+}
+
+@media (min-width: 720px) {
+    :root { --gutter: 32px; --space: 2rem; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--maroon); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--maroon-deep); }
+
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--maroon-ink);
+    margin: 0 0 0.6em;
+}
+
+h2 { font-size: clamp(1.6rem, 1.2rem + 1.5vw, 2.25rem); }
+h3 { font-size: 1.25rem; margin-top: 1.5em; }
+
+p { margin: 0 0 1em; max-width: 62ch; }
+
+.wrap {
+    width: 100%;
+    max-width: var(--wrap);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+.skip-link {
+    position: absolute;
+    left: var(--gutter);
+    top: -4rem;
+    padding: 0.5rem 1rem;
+    background: var(--gold);
+    color: var(--maroon-ink);
+    z-index: 100;
+}
+.skip-link:focus { top: 0.5rem; }
+
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    line-height: 1.2;
+}
+.button--gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--maroon-ink);
+}
+.button--gold:hover { background: var(--gold-soft); border-color: var(--gold-soft); color: var(--maroon-ink); }
+.button--outline {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.7);
+    color: #fff;
+}
+.button--outline:hover { border-color: #fff; background: rgba(255, 255, 255, 0.08); color: #fff; }
+
+/* Header */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--maroon);
+    color: #fff;
+    border-bottom: 1px solid rgba(201, 162, 75, 0.45);
+}
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 3.5rem;
+}
+.wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+}
+.wordmark:hover { color: var(--gold-soft); }
+.site-nav { display: flex; align-items: center; gap: 1.25rem; }
+.site-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.site-nav a:hover { color: var(--gold-soft); }
+.site-nav__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 2px;
+}
+@media (max-width: 599px) {
+    .site-nav { gap: 0.9rem; font-size: 0.95rem; }
+    .site-nav__phone span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .site-nav__phone { padding: 0.5rem; }
+}
+
+/* Hero: the shopfront photo with the sign's lettering over it */
+.hero {
+    position: relative;
+    min-height: 68vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: end;
+    overflow: hidden;
+    color: #fff;
+    isolation: isolate;
+    background: var(--maroon-deep);
+}
+.hero__media,
+.hero__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 72%;
+    z-index: -2;
+}
+@media (max-width: 719px) {
+    /* On narrow screens the whole photo height fits, so enlarge it and pin the bottom
+       to keep the shop window in view and the photographed sign out of it. */
+    .hero__media img { height: 140%; top: auto; bottom: 0; object-position: center bottom; }
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+        linear-gradient(to top, rgba(53, 16, 22, 0.94) 0%, rgba(53, 16, 22, 0.65) 45%, rgba(53, 16, 22, 0.15) 100%);
+}
+.hero__content {
+    min-width: 0;
+    text-align: center;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+}
+.hero__kicker {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-soft);
+    font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.3rem);
+    margin: 0 auto 0.5rem;
+}
+.hero__title {
+    font-size: clamp(2.5rem, 1rem + 8vw, 6.5rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 1rem;
+    padding-left: 0.28em; /* visually centre tracked text */
+}
+.hero__lede {
+    margin: 0 auto 1.75rem;
+    max-width: 44ch;
+    font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.92);
+}
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+/* Notice banner (hidden unless the owner removes the `hidden` attribute) */
+.notice {
+    margin-top: var(--space);
+}
+.notice p {
+    max-width: none;
+    margin: 0;
+    padding: 1rem 1.25rem;
+    background: var(--gold-soft);
+    border-left: 4px solid var(--gold);
+    color: var(--maroon-ink);
+    font-weight: 600;
+}
+
+/* Order strip */
+.order {
+    background: var(--paper-deep);
+    border-bottom: 1px solid var(--line);
+    padding-block: var(--space);
+}
+.order__grid {
+    display: grid;
+    gap: var(--space);
+}
+@media (min-width: 720px) {
+    .order__grid { grid-template-columns: 1fr 1fr; gap: calc(var(--space) * 2); }
+}
+.order__partners {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+}
+.order__partners img { height: 44px; width: auto; }
+
+/* About and opening hours */
+.about {
+    display: grid;
+    gap: var(--space);
+    padding-block: calc(var(--space) * 1.5);
+}
+@media (min-width: 820px) {
+    .about { grid-template-columns: 3fr 2fr; gap: calc(var(--space) * 2); }
+}
+.hours {
+    align-self: start;
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--maroon);
+    background: #fff;
+}
+.hours h2 { font-size: 1.5rem; }
+.hours__list { margin: 0; }
+.hours__list > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+}
+.hours__list dt { font-weight: 600; }
+.hours__list dd { margin: 0; text-align: right; white-space: nowrap; }
+.hours__closed { color: var(--ink-soft); }
+.hours__closure {
+    margin: 1rem 0 0;
+    padding: 0.75rem 1rem;
+    background: var(--gold-soft);
+    border-left: 4px solid var(--gold);
+    color: var(--maroon-ink);
+    font-weight: 600;
+}
+.hours__note { margin: 1rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+/* Menus */
+.menus { padding-block: var(--space) calc(var(--space) * 1.5); }
+.menus__grid {
+    display: grid;
+    gap: 1rem;
+}
+@media (min-width: 640px) {
+    .menus__grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+}
+.menu-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.5rem;
+    background: var(--maroon);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgba(201, 162, 75, 0.35);
+}
+.menu-card:hover,
+.menu-card:focus-visible { background: var(--maroon-deep); color: #fff; box-shadow: inset 0 0 0 2px var(--gold); }
+.menu-card__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: var(--gold);
+}
+.menu-card__desc { color: rgba(255, 255, 255, 0.9); }
+.menu-card__meta { font-size: 0.9rem; color: var(--gold-soft); margin-top: 0.4rem; }
+
+/* Gallery */
+.gallery { padding-bottom: calc(var(--space) * 1.5); }
+.gallery__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+@media (min-width: 640px) {
+    .gallery__grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+}
+.gallery__grid li { margin: 0; }
+.gallery__grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+/* Find us */
+.find-us {
+    background: #fff;
+    border-top: 1px solid var(--line);
+    padding-block: calc(var(--space) * 1.5);
+}
+.find-us__grid {
+    display: grid;
+    gap: var(--space);
+}
+@media (min-width: 820px) {
+    .find-us__grid { grid-template-columns: 2fr 3fr; gap: calc(var(--space) * 2); }
+}
+.find-us address { font-style: normal; margin-bottom: 0.5rem; font-size: 1.1rem; }
+.find-us h3 { margin-top: 1.25em; font-size: 1.05rem; }
+.find-us__social { list-style: none; padding: 0; margin: 0; display: flex; gap: 1.25rem; }
+
+.map {
+    min-height: 320px;
+    height: 100%;
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+@media (min-width: 820px) {
+    .map { min-height: 420px; }
+}
+.map__fallback { margin: 0; }
+.map.maplibregl-map { display: block; font: inherit; }
+.map--ready .map__fallback { display: none; }
+.maplibregl-popup-content { font-family: var(--font-body); font-size: 0.95rem; line-height: 1.4; padding: 0.75rem 1rem; border-radius: 2px; }
+.maplibregl-popup-content strong { font-family: var(--font-display); color: var(--maroon); font-size: 1.1rem; }
+.maplibregl-ctrl-attrib { font-family: var(--font-body); }
+
+/* Footer */
+.site-footer {
+    background: var(--maroon-ink);
+    color: rgba(255, 255, 255, 0.8);
+    padding-block: var(--space);
+    font-size: 0.95rem;
+}
+.site-footer p { margin: 0 0 0.25rem; max-width: none; }
+.site-footer a { color: var(--gold-soft); }
