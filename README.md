@@ -10,6 +10,7 @@ A single static page. No build step, no frameworks.
 - `vendor/maplibre/` – [MapLibre GL JS](https://maplibre.org) 5.24.0, self-hosted. (5.x is the last line with a classic-script build; 6.x is ES-module only, which browsers refuse to load from a `file://` page.) The map uses [OpenFreeMap](https://openfreemap.org) tiles, which are free for commercial use with no API key and no usage limits. (OpenStreetMap's own tile server was tried first, but it blocks visitors on some networks.)
 - `images/` – `hero-*` are the optimised shopfront photo, `gallery-*` are the photos shown in the grid
 - `pdf/` – menus
+- `package.json` – no dependencies and no build step; it only pins the Node.js version Vercel uses (`engines.node`). Vercel refuses to deploy when the project's Node.js version is retired, and this setting overrides the one in the Vercel dashboard.
 
 ## Common edits
 

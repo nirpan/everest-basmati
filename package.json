@@ -1,0 +1,8 @@
+{
+  "name": "everest-basmati",
+  "private": true,
+  "description": "Static site for Basmati Nepalese and Indian Restaurant, Southampton. No build step; this file only pins the Node.js version Vercel uses.",
+  "engines": {
+    "node": "24.x"
+  }
+}
