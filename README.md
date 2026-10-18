@@ -32,3 +32,7 @@ Then open http://localhost:8000.
 1. Clone the repository locally.
 2. Make your changes and push to the master branch.
 3. Vercel deploys the changes automatically.
+
+The domain `everestbasmati.co.uk` is attached to the `everest-basmati` project in Vercel (Project Settings, Domains), so every production deployment picks it up. It used to be an alias bound to one specific deployment through the old `now.json` file, which Vercel no longer reads; that is why a successful deploy once left the old site live. `www.everestbasmati.co.uk` is served by the separate `everestbasmati-redirect` project, which redirects to the main domain.
+
+If a deployment fails straight away with a Node.js version error, the project's Node.js version in the Vercel dashboard is out of date. `package.json` overrides it, so bump `engines.node` there to a version Vercel still supports.
